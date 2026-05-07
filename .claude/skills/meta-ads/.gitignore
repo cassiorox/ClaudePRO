@@ -1,0 +1,15 @@
+# Tokens e credenciais
+.env
+*.env
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

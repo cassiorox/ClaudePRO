@@ -1,0 +1,13 @@
+# Google Ads ClaudePRO — Cadastro de Contas
+# O Claude le este arquivo para resolver nomes de clientes para customer IDs.
+#
+# Formato:
+# clientes:
+#   - nome: "Nome do Cliente"
+#     customer_id: "1234567890"  # sem hifens
+#     notas: "Opcional — qualquer observacao"
+
+clientes: []
+  # - nome: "Meu Cliente"
+  #   customer_id: "1234567890"
+  #   notas: "Conta principal"

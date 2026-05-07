@@ -1,0 +1,35 @@
+# ============================================================================
+# Meta Ads ClaudePRO — Cadastro de Contas
+# ============================================================================
+#
+# Preencha este arquivo com as contas de anuncio, paginas e perfis do
+# Instagram de cada cliente. O Claude consulta este arquivo automaticamente
+# quando voce mencionar o nome do cliente (ex: "cria campanha pra DobraLabs").
+#
+# Dica: rode `read.py accounts` pra ver todas as contas disponiveis.
+#
+# Estrutura:
+#   - slug unico (sem espacos, lowercase)
+#     - nome de exibicao
+#     - conta de anuncio (act_XXX)
+#     - pagina do Facebook (page_id)
+#     - conta do Instagram (instagram_actor_id)
+#     - moeda
+#     - notas opcionais
+#
+# ============================================================================
+
+clientes:
+
+  # -- Exemplo (descomente e edite) --
+  #
+  # meu-cliente:
+  #   nome: "Nome do Cliente"
+  #   conta_anuncio: "act_XXXXXXXXX"
+  #   pagina_facebook: "XXXXXXXXX"
+  #   instagram_id: "XXXXXXXXX"
+  #   instagram_username: "@username"
+  #   moeda: "BRL"
+  #   notas: "qualquer observacao relevante"
+
+  # -- Suas contas abaixo --

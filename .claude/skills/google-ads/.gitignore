@@ -1,0 +1,9 @@
+.env
+google-ads.yaml
+__pycache__/
+*.pyc
+.DS_Store
+*.egg-info/
+dist/
+build/
+.venv/
