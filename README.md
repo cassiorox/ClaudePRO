@@ -6,17 +6,23 @@ Framework **ClaudePRO** pra usar o Claude Code com contexto do seu negócio.
 
 ## Como instalar
 
-**1. Abra a pasta no VS Code**
+**1. Clone o repositório**
+```bash
+git clone https://github.com/cassiorox/ClaudePRO.git
+cd ClaudePRO
+```
+
+**2. Abra no VS Code**
 ```bash
 code .
 ```
 
-**2. Abra o terminal integrado** (Ctrl + ` no Windows / Cmd + ` no Mac) e rode:
+**3. Abra o terminal integrado** (Ctrl + ` no Windows / Cmd + ` no Mac) e rode:
 ```bash
 claude
 ```
 
-**3. Chame o setup**
+**4. Chame o setup**
 ```
 /setup
 ```
