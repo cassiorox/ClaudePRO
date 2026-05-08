@@ -2,9 +2,7 @@
 
 Este repositório é o kit de boas-vindas do framework ClaudePRO.
 
-Se você acabou de clonar esse repositório:
-1. Rode `/setup` pra configurar o sistema pro seu negócio (uns 5 minutos)
-2. Depois rode `/mapear` pra criar skills personalizadas pro que você faz no dia a dia
+Se você acabou de clonar esse repositório, rode `/setup` pra configurar o sistema pro seu negócio (uns 5 minutos).
 
 ---
 
