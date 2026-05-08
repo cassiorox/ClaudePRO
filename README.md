@@ -37,8 +37,6 @@ O Claude vai te fazer algumas perguntas e configurar o sistema pro seu negócio.
 
 **Skills prontas pra usar:**
 - `/setup` — configura o sistema pro seu negócio (comece por aqui)
-- `/iniciar` — carrega o contexto do negócio no começo de cada sessão de trabalho
-- `/syncar` — salva o trabalho no GitHub (commit + push, configura na primeira vez)
 - `/meta-ads` — gerencia campanhas Meta Ads (Facebook/Instagram) via SDK oficial
 - `/google-ads` — gerencia campanhas Google Ads via SDK oficial
 
