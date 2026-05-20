@@ -24,6 +24,20 @@ Não é necessário listar o que foi lido nem confirmar a leitura. Apenas usar o
 
 ---
 
+## Clientes
+
+Cada cliente tem uma pasta em `clientes/<nome-do-cliente>/` com (no mínimo) um `contexto.md`.
+Esse `contexto.md` é a fonte de verdade sobre aquele cliente.
+
+- Quando o trabalho for **pra um cliente específico** (criativo, campanha, copy, proposta, análise), ler `clientes/<nome-do-cliente>/contexto.md` antes de criar qualquer coisa, e calibrar tudo ao contexto dele.
+- Se o usuário mencionar um cliente que **ainda não tem pasta**, sugerir rodar `novo cliente` pra cadastrar.
+- Cadastro de cliente novo: usar a skill `novo cliente` (`.claude/skills/novo-cliente/`), que pede o contexto, cria a pasta e salva o `contexto.md` a partir de `clientes/_template/contexto.md`.
+- `clientes/_template/` é só modelo — não é um cliente real.
+
+Recomendado que **todo cliente tenha um `contexto.md`**.
+
+---
+
 ## Fluxo de trabalho
 
 Antes de executar qualquer tarefa, verificar se existe uma skill relevante em `.claude/skills/` ou `.claude/commands/`.
