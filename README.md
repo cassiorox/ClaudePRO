@@ -37,8 +37,10 @@ O Claude vai te fazer algumas perguntas e configurar o sistema pro seu negócio.
 
 **Skills prontas pra usar:**
 - `/setup` — configura o sistema pro seu negócio (comece por aqui)
+- `/novo-cliente` — cadastra um cliente novo (cria a pasta e o contexto.md)
 - `/meta-ads` — gerencia campanhas Meta Ads (Facebook/Instagram) via SDK oficial
 - `/google-ads` — gerencia campanhas Google Ads via SDK oficial
+- `/proposta-comercial` — cria propostas comerciais em PDF com a identidade visual da sua marca
 
 **Pastas geradas pelo `/setup`:**
 - `_contexto/` — contexto do seu negócio e preferências
