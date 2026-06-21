@@ -1,6 +1,6 @@
 Assets (extensions: sitelinks, callouts)
 https://developers.google.com/google-ads/api/docs/assets/overview
-Baixado para Google Ads API v23
+Baixado para Google Ads API v24
 
 # Assets
 
@@ -30,7 +30,12 @@ There are objects that represent links among assets, asset sets, ad groups, camp
 
 ### Campaign assets example
 
-Before you create a `CampaignAssetSet`, you must first create a `Campaign` and an `AssetSet` containing one or more assets. You can assemble assets to create an inventory for all applicable ad formats in your campaign, or let Google Ads mix and match available assets based on which channel the ad is being served: YouTube, Gmail, Search, and others.
+Here's a visual representation of how some of the objects can be linked. The example starts with campaigns at the top, but the same hierarchy also applies to customers and ad groups.
+
+![Campaign asset set diagram](https://developers.google.com/static/google-ads/api/images/campaignassetset.svg)
+Diagram of campaign asset sets
+
+Before you create a `CampaignAssetSet`, you must first create a [`Campaign`](https://developers.google.com/google-ads/api/docs/campaigns/create-campaigns) and an `AssetSet` containing one or more assets. You can assemble assets to create an inventory for all applicable ad formats in your campaign, or let Google Ads mix and match available assets based on which channel the ad is being served: YouTube, Gmail, Search, and others.
 
 ## Asset types linked to ads
 
@@ -38,11 +43,11 @@ Some asset types can be linked directly to ads.
 
 | Asset type | AssetFieldType | Ad type |
 | --- | --- | --- |
-| Video | YOUTUBE_VIDEO | App ad / App engagement ad / Local ad / Responsive display ad |
-| Media bundle | MEDIA_BUNDLE, CUSTOM_LAYOUT | App ad / Display upload Ad |
-| Image | MARKETING_IMAGE, SQUARE_MARKETING_IMAGE, LOGO, LANDSCAPE_LOGO, PORTRAIT_MARKETING_IMAGE, CLASSIC_DISPLAY_IMAGE | App ad / App engagement ad / Local ad / Responsive display ad / Demand Gen multi-asset ad |
-| Text | HEADLINE, LONG_HEADLINE, DESCRIPTION, MANDATORY_AD_TEXT, CALL_TO_ACTION_SELECTION, BUSINESS_NAME | App ad / App engagement ad / Local ad / Responsive display ad / Responsive search ad / Smart campaign ad |
-| Call to Action | CALL_TO_ACTION | Local ad / Responsive display ad |
+| Video | YOUTUBE_VIDEO | App ad<br>App engagement ad<br>Local ad<br>Responsive display ad |
+| Media bundle | MEDIA_BUNDLE<br>CUSTOM_LAYOUT | App ad<br>Display upload Ad |
+| Image | MARKETING_IMAGE<br>SQUARE_MARKETING_IMAGE<br>LOGO<br>LANDSCAPE_LOGO<br>PORTRAIT_MARKETING_IMAGE<br>CLASSIC_DISPLAY_IMAGE | App ad<br>App engagement ad<br>Local ad<br>Responsive display ad<br>Demand Gen multi-asset ad |
+| Text | HEADLINE<br>LONG_HEADLINE<br>DESCRIPTION<br>MANDATORY_AD_TEXT<br>CALL_TO_ACTION_SELECTION<br>BUSINESS_NAME | App ad<br>App engagement ad<br>Local ad<br>Responsive display ad<br>Responsive search ad<br>Smart campaign ad |
+| Call to Action | CALL_TO_ACTION | Local ad<br>Responsive display ad |
 
 ## Asset types linked to customers, campaigns, and ad groups
 
@@ -50,27 +55,27 @@ Some types of assets can be linked to customers, campaigns, or ad groups through
 
 | Asset type | AssetFieldType | Linkage | Mutable |
 | --- | --- | --- | --- |
-| Business message | BUSINESS_MESSAGE | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Text | BUSINESS_NAME | CampaignAsset/CustomerAsset | No |
-| Image | AD_IMAGE | AdGroupAsset/CampaignAsset | No |
-| Image | BUSINESS_LOGO | CampaignAsset/CustomerAsset | No |
+| Business message | BUSINESS_MESSAGE | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Text | BUSINESS_NAME | CampaignAsset<br>CustomerAsset | No |
+| Image | AD_IMAGE | AdGroupAsset<br>CampaignAsset | No |
+| Image | BUSINESS_LOGO | CampaignAsset<br>CustomerAsset | No |
 | Lead form | LEAD_FORM | CampaignAsset | Yes |
-| Promotion | PROMOTION | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Callout | CALLOUT | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Structured snippet | STRUCTURED_SNIPPET | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Sitelink | SITELINK | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Mobile app | MOBILE_APP | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Hotel callout | HOTEL_CALLOUT | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Call | CALL | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
-| Price | PRICE | AdGroupAsset/CampaignAsset/CustomerAsset | Yes |
+| Promotion | PROMOTION | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Callout | CALLOUT | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Structured snippet | STRUCTURED_SNIPPET | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Sitelink | SITELINK | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Mobile app | MOBILE_APP | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Hotel callout | HOTEL_CALLOUT | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Call | CALL | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
+| Price | PRICE | AdGroupAsset<br>CampaignAsset<br>CustomerAsset | Yes |
 
 ### Location assets
 
-Location assets are handled differently from other asset types. See Location assets (.../docs/assets/location-assets) for details.
+Location assets are handled differently from other asset types. See [Location assets](https://developers.google.com/google-ads/api/docs/assets/location-assets) for details.
 
 ### Automatically created assets
 
-Automatically created assets cannot be modified. The `AssetSource` indicates whether an asset was user-created or was automatically generated by the system. Mutable types like sitelink can't be linked to automatically created assets.
+Automatically created assets cannot be modified. The [`AssetSource`](https://developers.google.com/google-ads/api/reference/rpc/v24/AssetSourceEnum.AssetSource) indicates whether an asset was user-created or was automatically generated by the system. Mutable types like sitelink can't be linked to automatically created assets.
 
 ## Asset types linked to asset sets
 
@@ -87,9 +92,7 @@ Certain asset types can be linked to specific types of asset sets.
 | DYNAMIC_FLIGHTS | DYNAMIC_FLIGHTS | CampaignAssetSet | Yes |
 | DYNAMIC_JOBS | DYNAMIC_JOBS | CampaignAssetSet | Yes |
 | DYNAMIC_TRAVEL | DYNAMIC_TRAVEL | CampaignAssetSet | Yes |
-| LOCATION | LOCATION_SYNC | CustomerAssetSet/CampaignAssetSet/AdGroupAssetSet | No (system generated) |
-| LOCATION | GMB_DYNAMIC_LOCATION_GROUP | CampaignAssetSet/AdGroupAssetSet | |
-| LOCATION | CHAIN_DYNAMIC_LOCATION_GROUP | CampaignAssetSet/AdGroupAssetSet | |
-| LOCATION | STATIC_LOCATION_GROUP | CampaignAssetSet/AdGroupAssetSet | |
-
-Page last updated 2026-05-14 UTC. Content reflects Google Ads API v23 (latest serving).
+| LOCATION | LOCATION_SYNC | CustomerAssetSet<br>CampaignAssetSet<br>AdGroupAssetSet | No (system generated) |
+| GMB_DYNAMIC_LOCATION_GROUP | | CampaignAssetSet<br>AdGroupAssetSet | |
+| CHAIN_DYNAMIC_LOCATION_GROUP | | CampaignAssetSet<br>AdGroupAssetSet | |
+| STATIC_LOCATION_GROUP | | CampaignAssetSet<br>AdGroupAssetSet | |

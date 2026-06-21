@@ -6,9 +6,9 @@ Queries GAQL uteis para Google Ads, organizadas por caso de uso.
 
 ## Versao da API (sempre usar a mais atual)
 
-**Versao em uso no projeto: `v23`** -- e a versao mais nova suportada pelo SDK `google-ads` 30.0.0 instalado (o `GoogleAdsClient` usa a v23 por padrao).
+**Versao em uso no projeto: `v24`** -- e a versao mais nova suportada pelo SDK `google-ads` 31.0.0 instalado (o `GoogleAdsClient` usa a v24 por padrao). SDK atualizado de 30.0.0 → 31.0.0 em 21/06/2026.
 
-**ATENCAO — o SDK esta atras da API:** a versao mais recente lancada da Google Ads API ja e a **v24 / v24.1** (abr-mai/2026), mas o SDK 30.0.0 so vai ate a **v23**. Para usar de fato a versao mais nova, e preciso **atualizar o SDK** (`pip install -U google-ads` para a 31.x ou superior) e so entao trocar a versao nas chamadas. Enquanto o SDK nao for atualizado, `v23` e a versao correta a usar.
+**Nota:** ate a 30.0.0 o SDK travava em v23 enquanto a API ja servia v24/v24.1. Com a 31.0.0 isso ficou alinhado (suporta v21–v24). A v24.1 e uma minor; o SDK expoe o pacote major `v24`, que e o correto a usar. (No Meta Ads SDK e API ja andavam alinhados.)
 
 **Regra (sempre usar a versao mais atual disponivel):**
 1. Usar sempre a versao MAIS RECENTE suportada pelo SDK instalado. O `GoogleAdsClient` ja seleciona a mais nova por padrao -- nao fixar versao antiga sem motivo.
@@ -24,8 +24,8 @@ A Google lanca ~3 versoes por ano e cada versao tem ~1 ano ate o sunset.
 
 | Versao | Lancamento | Sunset (aprox.) |
 |---|---|---|
-| `v24` / `v24.1` (mais nova da API) | abr-mai/2026 | ~2027 |
-| `v23` (mais nova do SDK 30.0.0) | 28/01/2026 | fev/2027 |
+| `v24` / `v24.1` (em uso, teto do SDK 31.0.0) | abr-mai/2026 | ~2027 |
+| `v23` | 28/01/2026 | fev/2027 |
 | `v22` | 2025 | out/2026 (tentativo) |
 | `v21` | 2025 | ago/2026 (tentativo) |
 

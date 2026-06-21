@@ -1,8 +1,8 @@
-# Documentacao oficial Google Ads API — v23
+# Documentacao oficial Google Ads API — v24
 
-Copia offline da documentacao oficial do Google (developers.google.com/google-ads/api), baixada com a skill apontando para **v23** (versao mais nova do SDK `google-ads` 30.0.0 instalado). Consulte estes arquivos antes de criar/editar campanhas, montar GAQL ou confirmar campos/comportamento da API.
+Copia offline da documentacao oficial do Google (developers.google.com/google-ads/api), baixada com a skill apontando para **v24** (versao em uso, teto do SDK `google-ads` 31.0.0 instalado). Consulte estes arquivos antes de criar/editar campanhas, montar GAQL ou confirmar campos/comportamento da API.
 
-> **Versao:** o projeto usa `v23` porque e o teto do SDK 30.0.0. A API ja tem **v24/v24.1** — para usar e preciso atualizar o SDK (`pip install -U google-ads`). Regra completa e tabela de sunset em `../api-reference.md`. As paginas oficiais servem sempre a versao mais recente em servico, entao parte do conteudo pode citar v24.
+> **Versao:** o projeto usa `v24`, a versao mais nova suportada pelo SDK 31.0.0 (atualizado de 30.0.0 em 21/06/2026, que travava em v23). Regra completa e tabela de sunset em `../api-reference.md`. As paginas oficiais servem sempre a versao mais recente em servico.
 
 ## Conceitos e estrutura
 
@@ -53,12 +53,12 @@ Algumas URLs originais davam 404; foram substituidas pela canonica oficial (anot
 4. bidding → `/campaigns/bidding/strategy-types`
 5. date-ranges → `/query/date-ranges`
 
-## Notas de versao (sunset-dates, atualizado 2026-06-10)
+## Notas de versao (sunset-dates)
 
-- Versao mais recente da API: **v24.1** (13/05/2026); major estavel: **v24** (22/04/2026).
-- **v23** (28/01/2026) — sunset previsto **fev/2027**. E o teto do SDK 30.0.0.
+- **v24** (22/04/2026) — major estavel **em uso**, teto do SDK 31.0.0. Minor mais recente: **v24.1** (13/05/2026). Sunset ~2027.
+- v23 (28/01/2026) — sunset previsto **fev/2027**.
 - v22 sunset ~out/2026 (tentativo); v21 sunset ~ago/2026 (tentativo).
 - Deprecacoes relevantes: call-only ads param de servir em fev/2027; conversoes offline / Customer Match migrando para a Data Manager API.
 
 ---
-Baixado em 2026-06-21. Para atualizar: atualizar o SDK `google-ads` e re-rodar o scrape destas paginas quando mudar de versao maior.
+Baixado em 2026-06-21 (v24, apos upgrade do SDK 30.0.0 → 31.0.0). Para atualizar: atualizar o SDK `google-ads` e re-rodar o scrape destas paginas quando mudar de versao maior.

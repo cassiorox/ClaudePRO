@@ -1,10 +1,13 @@
 GAQL grammar
 https://developers.google.com/google-ads/api/docs/query/grammar
-Baixado para Google Ads API v23
+Baixado para Google Ads API v24
 
 # Google Ads Query Language Grammar
 
-Grammar reference (in regular expression notation):
+This page contains the Google Ads Query Language grammar reference. For query structure details,
+see [Query Structure](https://developers.google.com/google-ads/api/docs/query/structure).
+
+Here is the Google Ads Query Language grammar reference (in regular expression notation):
 
 ```
 Query            -> SelectClause FromClause WhereClause? OrderByClause?
@@ -43,18 +46,26 @@ Function         -> LAST_14_DAYS | LAST_30_DAYS | LAST_7_DAYS |
                     THIS_WEEK_SUN_TODAY | TODAY | YESTERDAY
 ```
 
-- `?` indicates an optional element
-- `*` means zero or more; `+` means one or more
-- `(xxxxxx)` indicates a grouping
-- `[a-z0-9]` signifies character ranges
-- `|` stands for "or"
+`?` indicates an optional element
+
+`*` means zero or more; `+` means one or more
+
+`(xxxxxx)` indicates a grouping
+
+`[a-z0-9]` signifies character ranges
+
+`|` stands for "or"
 
 ## Rules and limitations
-- The REGEXP_MATCH operator uses RE2 syntax.
-- To match a literal `[`, `]`, `%`, or `_` using the LIKE operator, surround the character in square brackets. For example, the following condition matches all campaign.name values that start with `[Earth_to_Mars]`:
-  ```
-  campaign.name LIKE '[[]Earth[_]to[_]Mars[]]%'
-  ```
-- The LIKE operator can only be used on a string field, not an array.
 
-Page last updated 2026-05-13 UTC. Content reflects Google Ads API v23 (latest serving).
+- The `REGEXP_MATCH` operator uses [RE2 syntax](https://github.com/google/re2/wiki/Syntax).
+
+- To match a literal `[`, `]`, `%`, or `_` using the `LIKE` operator, surround
+the character in square brackets. For example, the following condition matches
+all `campaign.name` values that start with `[Earth_to_Mars]`:
+
+```
+campaign.name LIKE '[[]Earth[_]to[_]Mars[]]%'
+```
+
+- The `LIKE` operator can only be used on a string field, not an array.
