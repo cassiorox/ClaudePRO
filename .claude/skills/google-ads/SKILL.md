@@ -101,6 +101,12 @@ para obter o customer_id do cliente.
 
 Se o cliente nao estiver cadastrado, perguntar os dados e oferecer para adicionar ao arquivo.
 
+## Versao da API (sempre usar a mais atual)
+
+A skill usa sempre a versao MAIS RECENTE da Google Ads API suportada pelo SDK `google-ads` instalado. Hoje e **`v23`** (SDK 30.0.0) -- o `GoogleAdsClient` ja usa a v23 por padrao. **Obs:** a API ja tem v24/v24.1, mas o SDK 30.0.0 so vai ate a v23; para usar a v24 e preciso atualizar o SDK (`pip install -U google-ads`) antes. Detalhes e tabela de sunset em `references/api-reference.md`.
+
+Documentacao oficial do Google (v23) baixada para consulta offline: pasta `references/google-docs/` (indice em `references/google-docs/INDEX.md`). Consultar quando precisar confirmar campos, montar GAQL ou checar comportamento da API antes de criar/editar objetos.
+
 ## Como usar
 
 Todos os scripts estao em `.claude/skills/google-ads/scripts/`. O padrao e:

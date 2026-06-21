@@ -72,6 +72,12 @@ para obter conta_anuncio, pagina_facebook e instagram_id do cliente.
 
 Se o cliente nao estiver cadastrado, perguntar os dados e oferecer para adicionar ao arquivo.
 
+## Versao da API (sempre usar a mais atual)
+
+A skill usa sempre a versao MAIS RECENTE da Graph/Marketing API suportada pelo SDK `facebook-business` instalado. Hoje e **`v25.0`**. Antes de subir campanha ou fazer qualquer acao de escrita, garantir que a versao usada bate com o SDK (os scripts via `get_default_api()` ja herdam isso). Detalhes, tabela de versoes e mudancas da v25.0: `references/api-reference.md`.
+
+Documentacao oficial da Meta (v25.0) baixada para consulta offline: pasta `references/meta-docs/` (indice em `references/meta-docs/INDEX.md`). Consultar quando precisar confirmar parametros, campos ou comportamento da API antes de criar/editar objetos.
+
 ## Como usar
 
 Todos os scripts estao em `.claude/skills/meta-ads/scripts/`. O padrao e:

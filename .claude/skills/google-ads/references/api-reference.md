@@ -4,6 +4,40 @@ Queries GAQL uteis para Google Ads, organizadas por caso de uso.
 
 ---
 
+## Versao da API (sempre usar a mais atual)
+
+**Versao em uso no projeto: `v23`** -- e a versao mais nova suportada pelo SDK `google-ads` 30.0.0 instalado (o `GoogleAdsClient` usa a v23 por padrao).
+
+**ATENCAO — o SDK esta atras da API:** a versao mais recente lancada da Google Ads API ja e a **v24 / v24.1** (abr-mai/2026), mas o SDK 30.0.0 so vai ate a **v23**. Para usar de fato a versao mais nova, e preciso **atualizar o SDK** (`pip install -U google-ads` para a 31.x ou superior) e so entao trocar a versao nas chamadas. Enquanto o SDK nao for atualizado, `v23` e a versao correta a usar.
+
+**Regra (sempre usar a versao mais atual disponivel):**
+1. Usar sempre a versao MAIS RECENTE suportada pelo SDK instalado. O `GoogleAdsClient` ja seleciona a mais nova por padrao -- nao fixar versao antiga sem motivo.
+2. Periodicamente checar se ha SDK novo; se houver, atualizar o SDK e migrar para a versao de API mais nova, atualizando este arquivo.
+
+Para checar a versao instalada do SDK e a API que ele suporta:
+```bash
+python3 -c "import importlib.metadata as m; print('google-ads', m.version('google-ads'))"
+python3 -c "import google.ads.googleads as g, os; p=os.path.dirname(g.__file__); print(sorted([d for d in os.listdir(p) if d.startswith('v') and d[1:].isdigit()]))"
+```
+
+A Google lanca ~3 versoes por ano e cada versao tem ~1 ano ate o sunset.
+
+| Versao | Lancamento | Sunset (aprox.) |
+|---|---|---|
+| `v24` / `v24.1` (mais nova da API) | abr-mai/2026 | ~2027 |
+| `v23` (mais nova do SDK 30.0.0) | 28/01/2026 | fev/2027 |
+| `v22` | 2025 | out/2026 (tentativo) |
+| `v21` | 2025 | ago/2026 (tentativo) |
+
+Deprecacoes relevantes pra gestor de trafego (ver `references/google-docs/release-notes.md` e `sunset-dates.md`): call-only ads deixam de servir em fev/2027; conversoes offline / Customer Match migrando para a Data Manager API.
+
+Documentacao oficial baixada para consulta offline: pasta `references/google-docs/` (ver `references/google-docs/INDEX.md`). Consultar antes de criar/editar campanhas, montar GAQL ou confirmar campos.
+
+Release notes oficiais: https://developers.google.com/google-ads/api/docs/release-notes
+Sunset dates: https://developers.google.com/google-ads/api/docs/sunset-dates
+
+---
+
 ## Account KPIs
 
 ```sql

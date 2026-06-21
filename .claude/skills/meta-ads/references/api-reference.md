@@ -2,6 +2,38 @@
 
 Consulte este arquivo quando precisar de detalhes sobre parametros especificos.
 
+## Versao da API (Graph / Marketing API)
+
+**Versao atual e padrao do projeto: `v25.0`** -- lancada em 18/02/2026, e o default do SDK `facebook-business` 25.0.1 instalado.
+
+**Regra (sempre usar a versao mais atual disponivel):** todas as skills, scripts ad-hoc e chamadas diretas a Graph API do Meta devem usar a versao MAIS RECENTE suportada pelo SDK instalado. Hoje isso e `v25.0`. Quando o SDK for atualizado (ex: `facebook-business` 26.x), passar a usar `v26.0` e atualizar este arquivo. Antes de subir campanha ou fazer qualquer acao, confirmar que a versao usada bate com o SDK:
+- `FacebookAdsApi.init(..., api_version="v25.0")`
+- URLs diretas: `graph.facebook.com/v25.0/...`
+- Scripts que usam `get_default_api()` ja herdam a versao do SDK automaticamente (caminho preferido).
+
+Para checar a versao instalada do SDK: `python3 .claude/skills/meta-ads/scripts/setup.py`.
+
+Cada versao da Meta e mantida por no minimo 2 anos apos o lancamento; depois disso as chamadas sao redirecionadas pra versao mais antiga disponivel.
+
+| Versao | Lancamento | Fim de suporte (aprox.) |
+|---|---|---|
+| `v25.0` (atual) | 18/02/2026 | ~fev/2028 |
+| `v24.0` | 08/10/2025 | ~out/2027 |
+| `v23.0` | 29/05/2025 | ~mai/2027 |
+| `v22.0` | 21/01/2025 | ~jan/2027 |
+| `v21.0` | 02/10/2024 | ~out/2026 |
+
+### Mudancas relevantes da v25.0 (Marketing API)
+
+- **Advantage+ Shopping e App**: criacao, duplicacao e edicao desses tipos legados ficam bloqueadas. Migrar pra estrutura Advantage+ padrao (campanha de vendas/app com Advantage+ ligado).
+- **Insights (jobs assincronos)**: relatorios que falham agora retornam por padrao `error_code`, `error_message`, `error_subcode`, `error_user_title` e `error_user_msg`. O tipo de `error_code` mudou de `uint` pra `int`.
+- **Aviso pra v26.0**: metricas de alcance e impressoes de Pagina, Post, Video e Stories serao descontinuadas (ex: `page_impressions_unique`, `post_impressions_unique`, `total_video_impressions`). Conferir alternativas antes de migrar pra v26.0.
+- **Infra (webhooks)**: autoridade certificadora do mTLS muda em 31/03/2026; quem recebe webhook precisa atualizar a trust store.
+
+Changelog oficial: https://developers.facebook.com/docs/graph-api/changelog/version25.0
+
+Documentacao oficial baixada para consulta offline: pasta `references/meta-docs/` (ver `references/meta-docs/INDEX.md`).
+
 ## Objetivos de campanha (--objective)
 
 | Valor | Descricao |
