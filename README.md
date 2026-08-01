@@ -6,11 +6,20 @@ Framework **ClaudePRO** pra usar o Claude Code com contexto do seu negócio.
 
 ## Como instalar
 
-**1. Clone o repositório**
+**1. Copie o repositório**
+
+Escolha uma das opções:
+
+- **Opção A (recomendada):** clique em **"Use this template" → "Create a new repository"** no topo desta página do GitHub. Isso cria uma cópia sua, sem nenhum vínculo com este repositório. Depois clone a **sua** cópia.
+
+- **Opção B:** clone direto e desvincule do repositório original:
 ```bash
 git clone https://github.com/cassiorox/ClaudePRO.git
 cd ClaudePRO
+git remote remove origin
 ```
+
+> **Importante:** o `git remote remove origin` garante que nada do que você salvar aqui (contexto do negócio, clientes, credenciais) fique apontando pro repositório público. Se esquecer, sem problema — o `/setup` faz isso automaticamente.
 
 **2. Abra no VS Code**
 ```bash

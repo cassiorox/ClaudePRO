@@ -9,6 +9,28 @@ Esta skill e executada uma vez, na primeira entrada do usuario no framework. Faz
 
 ---
 
+## Passo 0 — Desvincular do repositorio original
+
+**Antes de qualquer pergunta**, verificar se o workspace ainda esta vinculado ao repositorio original do ClaudePRO:
+
+```bash
+git remote get-url origin
+```
+
+Se a URL apontar para `cassiorox/ClaudePRO` (qualquer variacao — https ou ssh), rodar:
+
+```bash
+git remote remove origin
+```
+
+E avisar o usuario em uma linha:
+
+> "Desvinculei essa pasta do repositorio original do ClaudePRO. Agora ela e 100% sua — nada do que voce salvar aqui (contexto, clientes, credenciais) tem como parar no repositorio publico."
+
+Se o remote ja apontar pra outro lugar (ou nao existir), nao fazer nada e nao comentar.
+
+---
+
 ## Antes de comecar
 
 1. Cumprimentar e explicar o que vai acontecer:
