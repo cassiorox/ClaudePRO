@@ -8,7 +8,46 @@ Uso: python3 setup.py
 
 import os
 import sys
-import shutil
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SKILL_DIR = os.path.dirname(SCRIPT_DIR)
+ENV_PATH = os.path.join(SKILL_DIR, ".env")
+
+# Adiciona scripts/ ao path pra importar lib
+sys.path.insert(0, SCRIPT_DIR)
+from lib import _load_env_file, mask_token
+
+ENV_TEMPLATE = """# Meta Ads ClaudePRO - Configuracao
+# Os scripts leem este arquivo automaticamente. NAO precisa adicionar ao ~/.zshrc.
+
+# OBRIGATORIO: Token de acesso da Meta (ver references/setup-meta-app.md)
+META_ADS_TOKEN=""
+
+# OBRIGATORIO: App ID do app Meta que gerou o token
+META_APP_ID=""
+
+# OPCIONAL: Conta de anuncio padrao (evita passar --account toda vez)
+META_AD_ACCOUNT_ID=""
+"""
+
+
+def check_env_file():
+    """Carrega o .env da skill. Cria a partir do template se nao existir."""
+    loaded = _load_env_file()
+    if loaded:
+        print(f"  [OK] .env carregado de {loaded}")
+        return True
+
+    print(f"  [FALHOU] .env nao encontrado em {ENV_PATH}")
+    try:
+        with open(ENV_PATH, "w", encoding="utf-8") as f:
+            f.write(ENV_TEMPLATE)
+        os.chmod(ENV_PATH, 0o600)
+        print(f"           Criei o template. Preencha e rode de novo:")
+        print(f"           {ENV_PATH}")
+    except OSError as e:
+        print(f"           Nao consegui criar o template: {e}")
+    return False
 
 
 def check_python():
@@ -45,12 +84,23 @@ def check_requests():
 def check_token():
     token = os.environ.get("META_ADS_TOKEN")
     if not token:
-        print("  [FALHOU] META_ADS_TOKEN nao definida")
-        print("           Adicione ao ~/.zshrc ou ~/.bashrc:")
-        print('           export META_ADS_TOKEN="seu-token-aqui"')
+        print("  [FALHOU] META_ADS_TOKEN vazia")
+        print(f"           Preencha no .env: {ENV_PATH}")
+        print('           META_ADS_TOKEN="seu-token-aqui"')
+        print("           Como gerar o token: references/setup-meta-app.md")
         return False
-    masked = token[:10] + "..." + token[-5:]
-    print(f"  [OK] META_ADS_TOKEN definida ({masked})")
+    print(f"  [OK] META_ADS_TOKEN definida ({mask_token(token)})")
+    return True
+
+
+def check_app_id():
+    app_id = os.environ.get("META_APP_ID")
+    if not app_id:
+        print("  [FALHOU] META_APP_ID vazia")
+        print(f"           Preencha no .env: {ENV_PATH}")
+        print('           META_APP_ID="123456789012345"')
+        return False
+    print(f"  [OK] META_APP_ID = {app_id}")
     return True
 
 
@@ -58,8 +108,8 @@ def check_account():
     account = os.environ.get("META_AD_ACCOUNT_ID")
     if not account:
         print("  [AVISO] META_AD_ACCOUNT_ID nao definida (opcional)")
-        print("          Voce pode definir uma conta padrao:")
-        print('          export META_AD_ACCOUNT_ID="act_123456789"')
+        print("          Da pra definir uma conta padrao no .env:")
+        print('          META_AD_ACCOUNT_ID="act_123456789"')
         return True  # Optional, not a failure
     print(f"  [OK] META_AD_ACCOUNT_ID = {account}")
     return True
@@ -128,11 +178,15 @@ def main():
     sdk_ok = check_sdk()
     req_ok = check_requests()
 
-    print("\n2. Autenticacao:")
+    print("\n2. Configuracao (.env):")
+    env_ok = check_env_file()
+
+    print("\n3. Autenticacao:")
     token_ok = check_token()
+    app_ok = check_app_id()
     account_ok = check_account()
 
-    print("\n3. Conectividade:")
+    print("\n4. Conectividade:")
     if sdk_ok and token_ok:
         api_ok = check_api_connection()
         if api_ok:
@@ -143,7 +197,7 @@ def main():
 
     # Summary
     print("\n" + "=" * 55)
-    all_ok = py_ok and sdk_ok and token_ok
+    all_ok = py_ok and sdk_ok and req_ok and token_ok and app_ok
     if all_ok and api_ok:
         print("  TUDO PRONTO! Skill meta-ads configurada.")
         print("  Use via Claude Code com linguagem natural")

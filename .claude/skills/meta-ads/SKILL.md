@@ -13,15 +13,18 @@ Quando o usuario pedir para configurar, rodar setup, ou for a primeira vez usand
 
 **IMPORTANTE:** Ler `references/setup-meta-app.md` ANTES de comecar o setup. Esse arquivo contem o passo a passo completo para criar o app no Meta Developer Dashboard, gerar o token e resolver problemas. Se o aluno mandar prints ou tiver duvidas sobre alguma tela do Facebook, consultar esse arquivo para orientar.
 
-### 1. Verificar dependencias
+### 1. Verificar dependencias e criar o .env
 
 ```bash
 python3 .claude/skills/meta-ads/scripts/setup.py
 ```
 
-### 2. Verificar .env
+O script verifica Python, SDK e `requests`, e — se o `.env` da skill nao existir —
+cria ele ja com o template preenchivel. Basta preencher e rodar de novo.
 
-Checar se existe `.claude/skills/meta-ads/.env`. Se NAO existir, criar com o template:
+### 2. Conferir o .env
+
+O arquivo fica em `.claude/skills/meta-ads/.env` e tem este formato:
 
 ```
 # Meta Ads ClaudePRO — Configuracao
