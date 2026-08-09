@@ -2,6 +2,10 @@
 Fonte: https://developers.facebook.com/docs/marketing-api/reference/ad-creative-link-data/
 Baixado para Meta Marketing API v25.0
 
+> **Conteudo v25.0.** A pagina de referencia standalone deixou de existir na estrutura de docs da v26.0;
+> o `link_data` foi consolidado em `ad-creative.md`. A estrutura nao mudou na v26.0.
+> Para campos novos, consultar `ad-creative.md` (v26.0).
+
 ---
 
 # Ad Creative Link Data

@@ -3,6 +3,9 @@ Fonte: https://developers.facebook.com/blog/post/2021/12/21/simplifying-campaign
 (Nota: a URL original /marketing-api/outcome-driven-ads/ retorna 404; este e o documento oficial de referencia do ODAX. ODAX e obrigatorio desde a v21.0.)
 Baixado para Meta Marketing API v25.0
 
+> **Post de blog de 2021, sem versao de API.** ODAX e obrigatorio desde a v21.0 e segue valendo na v26.0.
+> Mantido como material de contexto sobre os objetivos `OUTCOME_*`.
+
 ---
 
 # Simplifying campaign objectives with Outcome-Driven Ad Experiences

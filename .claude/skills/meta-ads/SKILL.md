@@ -77,9 +77,20 @@ Se o cliente nao estiver cadastrado, perguntar os dados e oferecer para adiciona
 
 ## Versao da API (sempre usar a mais atual)
 
-A skill usa sempre a versao MAIS RECENTE da Graph/Marketing API suportada pelo SDK `facebook-business` instalado. Hoje e **`v25.0`**. Antes de subir campanha ou fazer qualquer acao de escrita, garantir que a versao usada bate com o SDK (os scripts via `get_default_api()` ja herdam isso). Detalhes, tabela de versoes e mudancas da v25.0: `references/api-reference.md`.
+A skill usa sempre a versao MAIS RECENTE da Graph/Marketing API suportada pelo SDK `facebook-business` instalado. Hoje e **`v26.0`** (lancada 29/07/2026, SDK `facebook-business` 26.0.0). Antes de subir campanha ou fazer qualquer acao de escrita, garantir que a versao usada bate com o SDK (os scripts via `get_default_api()` ja herdam isso). Detalhes, tabela de versoes e mudancas da v26.0: `references/api-reference.md`.
 
-Documentacao oficial da Meta (v25.0) baixada para consulta offline: pasta `references/meta-docs/` (indice em `references/meta-docs/INDEX.md`). Consultar quando precisar confirmar parametros, campos ou comportamento da API antes de criar/editar objetos.
+Documentacao oficial da Meta (v26.0) baixada para consulta offline: pasta `references/meta-docs/` (indice em `references/meta-docs/INDEX.md`). Consultar quando precisar confirmar parametros, campos ou comportamento da API antes de criar/editar objetos.
+
+### Quebras da v26.0 que afetam o dia a dia
+
+- **`explore` e `explore_home` sumiram** de `instagram_positions`. Se o usuario pedir placement manual no Explore, avisar que a Meta removeu o posicionamento — especificar retorna erro.
+- **`story` saiu de `messenger_positions`** (removido silenciosamente).
+- **Nicho HEC-F** (habitacao, emprego, credito/financeiro) com targeting restrito exige `targeting_automation.advantage_audience` explicito (`0` ou `1`) no `--targeting`. Os scripts nao passam esse flag sozinhos; omitir retorna `ADS_TARGETING__REQUIRE_EXPLICIT_ADVANTAGE_AUDIENCE_FLAG`.
+- **Shop Ads**: criativo elegivel em conta com shop passa a defaultar para `destination_type = WEBSITE_AND_SHOP`. Para evitar, usar `WEBSITE_AND_SHOP_OPT_OUT`.
+- **Poll ads** deixaram de existir (`poll_spec` indisponivel).
+- **`targeting.py delivery`** segue funcionando, mas `daily_outcomes_curve`, `budget_guardrail` e `estimate_dau` nao vem mais na resposta.
+
+Lista completa em `references/meta-docs/changelog-v26.md`.
 
 ## Como usar
 

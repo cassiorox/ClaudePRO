@@ -1,53 +1,76 @@
-# Documentacao oficial Meta Marketing API — v25.0
+# Documentacao oficial Meta Marketing API — v26.0
 
-Copia offline da documentacao oficial da Meta (developers.facebook.com), baixada para a versao **v25.0** da Graph/Marketing API. Consulte estes arquivos antes de subir ou editar campanhas quando precisar confirmar parametros, campos, edges ou comportamento da API.
+Copia offline da documentacao oficial (developers.facebook.com) referente a **API v26.0**, lancada em 29/07/2026. Consultar antes de subir ou editar campanhas quando precisar confirmar parametros, campos, edges ou comportamento da API.
 
-> Sempre usar a versao MAIS ATUAL suportada pelo SDK instalado (hoje `v25.0`). Quando o SDK subir de versao, re-baixar estas paginas para a nova versao. Regra completa em `../api-reference.md`.
+Cada arquivo traz a URL de origem e a data do scrape na primeira linha.
 
-## Nucleo (referencia de objetos)
+**Como atualizar:** as paginas oficiais servem markdown puro em
+`https://developers.facebook.com/documentation/ads-commerce/<path>.md`.
+Baixar com `curl -sL` e sobrescrever — com User-Agent de browser a Meta devolve HTML em vez de markdown, entao nao trocar o UA.
+
+## Referencia de objetos
 
 | Arquivo | Conteudo |
 |---|---|
-| [campaign.md](campaign.md) | Objeto Campaign — fields, edges, error codes (objetivos, special_ad_categories, bid_strategy no nivel de campanha) |
-| [ad-set.md](ad-set.md) | Objeto Ad Set — orcamento, schedule, optimization_goal, billing_event, promoted_object, targeting |
-| [ad.md](ad.md) | Objeto Ad — criativo, status, tracking_specs, conversion_domain |
-| [ad-creative.md](ad-creative.md) | Objeto AdCreative — estrutura geral do criativo |
-| [ad-creative-link-data.md](ad-creative-link-data.md) | link_data (imagem/carrossel): link, message, name, image_hash, child_attachments, call_to_action |
-| [object-story-spec.md](object-story-spec.md) | object_story_spec — montagem do post do anuncio (page_id, link_data, video_data) |
-| [targeting-specs.md](targeting-specs.md) | Estrutura de targeting — geo_locations, idade, genero, interesses, comportamentos, posicionamentos |
-| [bidding.md](bidding.md) | Estrategias de lance (bid_strategy) e como/quando usar teto/custo-alvo |
-| [insights.md](insights.md) | Insights API — visao geral e jobs assincronos |
-| [insights-parameters.md](insights-parameters.md) | Parametros de insights: fields, date_preset, breakdowns, time_increment |
-| [campaign-structure.md](campaign-structure.md) | Hierarquia Campaign > Ad Set > Ad |
-| [changelog-v25.md](changelog-v25.md) | Changelog oficial da v25.0 (mudancas e deprecacoes) |
+| [changelog-v26.md](changelog-v26.md) | Changelog completo da v26.0 (breaking changes, deprecacoes, datas) — **ler antes de qualquer migracao** |
+| [campaign.md](campaign.md) | Campaign (`/act_X/campaigns`) — objetivos, special_ad_categories, CBO |
+| [adset.md](adset.md) | Ad Set (`/act_X/adsets`) — orcamento, otimizacao, targeting, promoted_object |
+| [ad.md](ad.md) | Ad (`/act_X/ads`) — criacao, copies, limites |
+| [ad-creative.md](ad-creative.md) | Ad Creative — object_story_spec, asset_feed_spec, contextual_multi_ads |
+| [ad-image.md](ad-image.md) | Upload de imagens (`/act_X/adimages`) — hashes |
+| [ad-videos.md](ad-videos.md) | Upload de videos (`/act_X/advideos`) |
+| [campaign-structure.md](campaign-structure.md) | Visao geral da Marketing API e hierarquia Campaign > Ad Set > Ad |
 
-## Guias
+## Publicos e targeting
+
+| Arquivo | Conteudo |
+|---|---|
+| [targeting-basico.md](targeting-basico.md) | Targeting basico — geo, idade, genero |
+| [targeting-avancado.md](targeting-avancado.md) | Targeting avancado — interesses, comportamentos, flexible_spec |
+| [targeting-search.md](targeting-search.md) | Busca de interesses/comportamentos/geo (`/search`) |
+| [custom-audience.md](custom-audience.md) | Publicos personalizados — engajamento, site, lista |
+| [lookalike-audiences.md](lookalike-audiences.md) | Publicos semelhantes — ratio, country, lookalike_spec |
+| [placement-asset-customization.md](placement-asset-customization.md) | asset_customization_rules (feed vs story por midia) |
+
+## Insights
+
+| Arquivo | Conteudo |
+|---|---|
+| [insights-api.md](insights-api.md) | Guia introdutorio de Insights |
+| [insights-reference.md](insights-reference.md) | Referencia completa — parametros, fields, action types |
+| [insights-breakdowns.md](insights-breakdowns.md) | Breakdowns disponiveis |
+
+## Guias e formatos
 
 | Arquivo | Conteudo |
 |---|---|
 | [get-started.md](get-started.md) | Primeiros passos com a Marketing API |
+| [bidding.md](bidding.md) | Estrategias de lance e como/quando usar teto/custo-alvo |
 | [advantage-plus-sales.md](advantage-plus-sales.md) | Advantage+ Sales/App/Leads (substituto do ASC, descontinuado na v25) |
-| [outcome-driven-ads.md](outcome-driven-ads.md) | ODAX — objetivos OUTCOME_* (obrigatorio desde a v21) |
-| [conversions-api.md](conversions-api.md) | Conversions API (CAPI) — envio de eventos server-side |
-| [custom-audiences.md](custom-audiences.md) | Publicos personalizados — criacao, schemas de hashing, regras |
-| [lookalike-audiences.md](lookalike-audiences.md) | Publicos semelhantes (lookalike) — ratio, country, lookalike_spec |
+| [carousel-ads.md](carousel-ads.md) | Anuncios em carrossel e video |
 | [lead-ads.md](lead-ads.md) | Lead Ads / formularios de geracao de leads |
-| [carousel-ads.md](carousel-ads.md) | Anuncios em carrossel (e video) |
+| [conversions-api.md](conversions-api.md) | Conversions API (CAPI) — eventos server-side |
+| [ads-whatsapp-status.md](ads-whatsapp-status.md) | Ads em WhatsApp Status (novidade da v26.0) |
 
-## Notas da v25.0 (importante)
+## Conteudo que continua em v25.0
 
-- **Advantage+ Shopping (ASC)** e **Advantage+ App campaigns** estao **descontinuadas**: nao podem ser criadas, duplicadas nem editadas. Migrar para Advantage+ Sales/App/Leads padrao (ver `advantage-plus-sales.md`).
-- **ODAX obrigatorio** desde a v21: usar objetivos `OUTCOME_*`.
-- **Insights (jobs assincronos)** agora retornam campos de erro por padrao (`error_code`, `error_message`, `error_subcode`, `error_user_title`, `error_user_msg`); `error_code` mudou de `uint` para `int`. Parametro `metadata=1` depreciado.
+Estas paginas deixaram de existir como referencia standalone na estrutura de docs da v26.0. O conteudo segue valido (as estruturas nao mudaram), mas para campos novos consultar o arquivo v26.0 indicado.
 
-## Fallbacks de URL no download (5 paginas)
+| Arquivo | Situacao |
+|---|---|
+| [object-story-spec.md](object-story-spec.md) | Consolidado pela Meta dentro de `ad-creative.md` |
+| [ad-creative-link-data.md](ad-creative-link-data.md) | Consolidado pela Meta dentro de `ad-creative.md` |
+| [outcome-driven-ads.md](outcome-driven-ads.md) | Post de blog de 2021, sem versao de API. ODAX segue obrigatorio na v26.0 |
 
-Algumas URLs originais davam 404 na v25; foram substituidas pela referencia oficial equivalente (anotado no cabecalho de cada arquivo):
-1. `targeting-specs` → `/audiences/reference/basic-targeting/`
-2. `insights-parameters` → consolidado da Insights API + ad-account/insights (nao ha pagina standalone na v25)
-3. `advantage-plus-sales` → `/advantage-campaigns/` (ASC descontinuada)
-4. `carousel-ads` → `/guides/videoads/` (Video and Carousel Ads)
-5. `outcome-driven-ads` → blog oficial do ODAX
+## Avisos da v26.0 para o fluxo desta skill
+
+- `instagram_positions`: **`explore` e `explore_home` nao existem mais** — especificar retorna erro. Remover de qualquer targeting.
+- `messenger_positions`: valor `story` removido (silenciosamente).
+- Conjuntos **HEC-F** (habitacao, emprego, credito) com targeting restrito **exigem** `targeting_automation.advantage_audience` explicito (`0` ou `1`). Os scripts desta skill nao passam esse flag sozinhos — incluir no `--targeting`.
+- **Shop Ads**: criativos elegiveis passam a defaultar para `destination_type = WEBSITE_AND_SHOP` quando a conta tem shop. Opt-out via `destination_spec.destination_type = WEBSITE_AND_SHOP_OPT_OUT`.
+- **Delivery Estimate**: campos `daily_outcomes_curve`, `budget_guardrail` e `estimate_dau` foram removidos da resposta. `targeting.py delivery` continua funcionando — esses campos apenas nao vem mais.
+- **Poll ads**: `poll_spec` e o tipo `poll` em `interactive_components_spec` ficaram indisponiveis.
+- **27/10/2026**: a maioria dessas remocoes passa a valer para TODAS as versoes, inclusive chamadas sem versao explicita.
 
 ---
-Baixado em 2026-06-21. Para atualizar: re-rodar o scrape destas paginas quando o SDK `facebook-business` mudar de versao maior.
+Scrape em 2026-08-09. Os links "Try it in Graph API Explorer" dentro dos arquivos ainda apontam para `version=v25.0` — isso vem das proprias paginas da Meta e foi mantido verbatim.

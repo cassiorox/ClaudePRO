@@ -4,35 +4,33 @@ Consulte este arquivo quando precisar de detalhes sobre parametros especificos.
 
 ## Versao da API (Graph / Marketing API)
 
-**Versao atual e padrao do projeto: `v25.0`** -- lancada em 18/02/2026, e o default do SDK `facebook-business` 25.0.1 instalado.
+**Versao atual e padrao do projeto: `v26.0`** -- lancada em 29/07/2026, e o default do SDK `facebook-business` 26.0.0 instalado.
 
-**Regra (sempre usar a versao mais atual disponivel):** todas as skills, scripts ad-hoc e chamadas diretas a Graph API do Meta devem usar a versao MAIS RECENTE suportada pelo SDK instalado. Hoje isso e `v25.0`. Quando o SDK for atualizado (ex: `facebook-business` 26.x), passar a usar `v26.0` e atualizar este arquivo. Antes de subir campanha ou fazer qualquer acao, confirmar que a versao usada bate com o SDK:
-- `FacebookAdsApi.init(..., api_version="v25.0")`
-- URLs diretas: `graph.facebook.com/v25.0/...`
-- Scripts que usam `get_default_api()` ja herdam a versao do SDK automaticamente (caminho preferido).
-
-Para checar a versao instalada do SDK: `python3 .claude/skills/meta-ads/scripts/setup.py`.
+Regra: todas as skills e scripts ad-hoc do Meta Ads usam `v26.0`. Chamadas diretas a Graph API (URL `graph.facebook.com/v26.0/...`) e o `FacebookAdsApi.init(..., api_version="v26.0")` devem bater com o SDK. Scripts que usam `get_default_api()` ja herdam a v26.0 automaticamente.
 
 Cada versao da Meta e mantida por no minimo 2 anos apos o lancamento; depois disso as chamadas sao redirecionadas pra versao mais antiga disponivel.
 
-| Versao | Lancamento | Fim de suporte (aprox.) |
+| Versao | Lancamento | Fim de suporte |
 |---|---|---|
-| `v25.0` (atual) | 18/02/2026 | ~fev/2028 |
-| `v24.0` | 08/10/2025 | ~out/2027 |
-| `v23.0` | 29/05/2025 | ~mai/2027 |
-| `v22.0` | 21/01/2025 | ~jan/2027 |
-| `v21.0` | 02/10/2024 | ~out/2026 |
+| `v26.0` (atual) | 29/07/2026 | TBD (~jul/2028) |
+| `v25.0` | 18/02/2026 | TBD (~fev/2028) |
+| `v24.0` | 08/10/2025 | **06/10/2026 (Marketing API)** |
+| `v23.0` | 29/05/2025 | encerrada em 09/06/2026 |
 
-### Mudancas relevantes da v25.0 (Marketing API)
+### Mudancas relevantes da v26.0 (Marketing API)
 
-- **Advantage+ Shopping e App**: criacao, duplicacao e edicao desses tipos legados ficam bloqueadas. Migrar pra estrutura Advantage+ padrao (campanha de vendas/app com Advantage+ ligado).
-- **Insights (jobs assincronos)**: relatorios que falham agora retornam por padrao `error_code`, `error_message`, `error_subcode`, `error_user_title` e `error_user_msg`. O tipo de `error_code` mudou de `uint` pra `int`.
-- **Aviso pra v26.0**: metricas de alcance e impressoes de Pagina, Post, Video e Stories serao descontinuadas (ex: `page_impressions_unique`, `post_impressions_unique`, `total_video_impressions`). Conferir alternativas antes de migrar pra v26.0.
-- **Infra (webhooks)**: autoridade certificadora do mTLS muda em 31/03/2026; quem recebe webhook precisa atualizar a trust store.
+- **Instagram Explore Feed removido**: `explore` e `explore_home` nao existem mais em `instagram_positions`; especificar retorna erro. Remover de qualquer targeting.
+- **Advantage+ Audience (HEC-F)**: conjunto de habitacao/emprego/credito com targeting restrito exige `targeting_automation.advantage_audience` explicito (`0` ou `1`); omitir retorna `ADS_TARGETING__REQUIRE_EXPLICIT_ADVANTAGE_AUDIENCE_FLAG`. Recomendado: passar sempre explicito nesses nichos (os scripts desta skill nao passam sozinhos).
+- **Messenger Stories**: valor `story` removido de `messenger_positions` (silencioso).
+- **Poll ads**: `poll_spec` e `interactive_components_spec.poll` indisponiveis.
+- **Shop Ads**: criativos elegiveis defaultam pra `destination_spec.destination_type=WEBSITE_AND_SHOP` quando a conta tem shop; opt-out com `WEBSITE_AND_SHOP_OPT_OUT`.
+- **Delivery Estimate**: campos `daily_outcomes_curve`, `budget_guardrail`, `estimate_dau` removidos.
+- **WhatsApp Status**: novos recursos (identity spec, carrossel ate 10 cards, otimizacao offsite pra Sales/Leads/Engagement).
+- **Protocolo**: `pretty`, `debug`, `If-None-Match` ignorados; `date_format` e `GET /?ids=...` retornam erro.
+- **27/10/2026**: a maioria dessas remocoes passa a valer pra TODAS as versoes, inclusive chamadas sem versao.
 
-Changelog oficial: https://developers.facebook.com/docs/graph-api/changelog/version25.0
-
-Documentacao oficial baixada para consulta offline: pasta `references/meta-docs/` (ver `references/meta-docs/INDEX.md`).
+Changelog oficial: https://developers.facebook.com/docs/graph-api/changelog/version26.0
+Documentacao completa baixada (scrape 09/08/2026): ver pasta `meta-docs/` ao lado deste arquivo (`INDEX.md` tem o mapa).
 
 ## Objetivos de campanha (--objective)
 
@@ -103,7 +101,7 @@ LEARN_MORE, SHOP_NOW, SIGN_UP, DOWNLOAD, GET_OFFER, GET_QUOTE, SUBSCRIBE, WATCH_
   ],
   "publisher_platforms": ["facebook", "instagram"],
   "facebook_positions": ["feed", "story", "reels"],
-  "instagram_positions": ["stream", "story", "reels", "explore"],
+  "instagram_positions": ["stream", "story", "reels"],
   "device_platforms": ["mobile", "desktop"]
 }
 ```

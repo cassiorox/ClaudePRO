@@ -2,6 +2,10 @@
 Fonte: https://developers.facebook.com/docs/marketing-api/reference/ad-creative-object-story-spec/
 Baixado para Meta Marketing API v25.0
 
+> **Conteudo v25.0.** A pagina de referencia standalone deixou de existir na estrutura de docs da v26.0;
+> a Meta consolidou o `object_story_spec` dentro de `ad-creative.md`. A estrutura do spec nao mudou na v26.0.
+> Para campos novos, consultar `ad-creative.md` (v26.0).
+
 ---
 
 # Ad Creative Object Story Spec
