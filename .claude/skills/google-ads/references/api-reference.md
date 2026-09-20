@@ -6,9 +6,11 @@ Queries GAQL uteis para Google Ads, organizadas por caso de uso.
 
 ## Versao da API (sempre usar a mais atual)
 
-**Versao em uso no projeto: `v24`** -- e a versao mais nova suportada pelo SDK `google-ads` 31.0.0 instalado (o `GoogleAdsClient` usa a v24 por padrao). SDK atualizado de 30.0.0 → 31.0.0 em 21/06/2026.
+**Versao em uso no projeto: `v25`** -- e a versao mais nova suportada pelo SDK `google-ads` 32.0.0 (o `GoogleAdsClient` usa a v25 por padrao). SDK atualizado de 31.0.0 → 32.0.0 em 20/09/2026.
 
-**Nota:** ate a 30.0.0 o SDK travava em v23 enquanto a API ja servia v24/v24.1. Com a 31.0.0 isso ficou alinhado (suporta v21–v24). A v24.1 e uma minor; o SDK expoe o pacote major `v24`, que e o correto a usar. (No Meta Ads SDK e API ja andavam alinhados.)
+**Nota:** ate a 30.0.0 o SDK travava em v23 enquanto a API ja servia v24/v24.1. Com a 31.0.0 isso ficou alinhado, e a 32.0.0 suporta v21–v25.
+
+**Nota critica sobre o developer token:** o Google aposentou os developer tokens em **09/09/2026**. O nivel de acesso passou a pertencer ao **projeto do Google Cloud** que gerou as credenciais OAuth, e conta MCC deixou de ser obrigatoria. O token continua aceito no header, porem ignorado, e sera rejeitado numa versao maior futura. Detalhe que pega muita gente: **ate a 31.4.0 a biblioteca Python recusava a configuracao sem o token**, mesmo com a API ja aceitando. Foi a 32.0.0 que removeu essa validacao. Fonte: https://developers.google.com/google-ads/api/docs/api-policy/developer-token
 
 **Regra (sempre usar a versao mais atual disponivel):**
 1. Usar sempre a versao MAIS RECENTE suportada pelo SDK instalado. O `GoogleAdsClient` ja seleciona a mais nova por padrao -- nao fixar versao antiga sem motivo.
@@ -24,7 +26,8 @@ A Google lanca ~3 versoes por ano e cada versao tem ~1 ano ate o sunset.
 
 | Versao | Lancamento | Sunset (aprox.) |
 |---|---|---|
-| `v24` / `v24.1` (em uso, teto do SDK 31.0.0) | abr-mai/2026 | ~2027 |
+| `v25` (em uso, teto do SDK 32.0.0) | set/2026 | ~2027 |
+| `v24` / `v24.1` | abr-mai/2026 | ~2027 |
 | `v23` | 28/01/2026 | fev/2027 |
 | `v22` | 2025 | out/2026 (tentativo) |
 | `v21` | 2025 | ago/2026 (tentativo) |

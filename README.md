@@ -51,6 +51,9 @@ O Claude vai te fazer algumas perguntas e configurar o sistema pro seu negócio.
 - `/google-ads` — gerencia campanhas Google Ads via SDK oficial
 - `/proposta-comercial` — cria propostas comerciais em PDF com a identidade visual da sua marca
 
+**Materiais de apoio:**
+- `.claude/skills/google-ads/references/mcp-server.md` — playbook do servidor MCP oficial do Google Ads (leitura direta da conta dentro do Claude), incluindo por que no Meta o conector é de um clique e no Google não
+
 **Pastas geradas pelo `/setup`:**
 - `_contexto/` — contexto do seu negócio e preferências
 - `marca/` — guia de identidade visual da sua marca

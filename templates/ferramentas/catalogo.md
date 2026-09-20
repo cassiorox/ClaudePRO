@@ -208,13 +208,27 @@ gh release create v1.0.0
 **O que faz:** Gerencia campanhas no Facebook/Instagram Ads: criar, editar, pausar, duplicar, ler insights, configurar publicos
 **Precisa de conta:** Sim, conta de anuncios Meta + token de longa duracao
 **Recomendacao:** Use a skill `/meta-ads` (43 subcomandos cobrindo CRUD completo + targeting).
+**Atalho pra so consultar:** a Meta tem **conector oficial dentro do Claude**, que conecta com login, sem
+criar app nem gerar token. Resolve leitura. Pra criar e editar em escala, a skill continua sendo o caminho.
 **Quando usar:** Skills de gestao de midia paga Meta, relatorios de performance, criacao de campanhas, ajuste de orcamento
 
 ### Google Ads API
 **O que faz:** Le e edita campanhas Google Ads (Search, Performance Max, Shopping), busca keywords, le quality score, gera relatorios via GAQL
-**Precisa de conta:** Sim, conta Google Ads + developer token
+**Precisa de conta:** Sim, conta Google Ads + projeto proprio no Google Cloud com a Google Ads API ativada
+e nivel de acesso Explorer ou acima. **Developer token nao e mais necessario** (aposentado em 09/09/2026).
+A API nao cobra nada, mas projeto em Free Trial do Cloud e recusado no Explorer.
 **Recomendacao:** Use a skill `/google-ads` (30 subcomandos: GAQL + CRUD + Quality Score + Keyword Planner).
 **Quando usar:** Skills de gestao Google Ads, pesquisa de keywords, relatorios de quality score, monitoramento de campanhas
+
+### Google Ads MCP (servidor oficial do Google)
+**O que faz:** Expoe a conta do Google Ads como ferramentas MCP dentro do Claude. **Somente leitura**, tres
+ferramentas (listar contas, metadados de recurso, query GAQL montada por campos).
+**Precisa de conta:** as mesmas credenciais da skill `/google-ads`, mais `pipx` e Python 3.12+.
+**Como instalar:** `pipx install "git+https://github.com/googleads/google-ads-mcp.git"` (a versao do PyPI
+esta quebrada). Passo a passo completo, incluindo a autenticacao por Application Default Credentials, em
+`.claude/skills/google-ads/references/mcp-server.md`.
+**Quando usar:** pergunta solta sobre desempenho, explorar conta que voce nao conhece. Pra criar, editar ou
+rodar rotina repetivel, use a skill. Regra curta: ler e explorar, MCP. Escrever e repetir, skill.
 
 ---
 

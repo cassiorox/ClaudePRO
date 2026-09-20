@@ -60,12 +60,16 @@ def check_dependencies():
 def check_env():
     """Verifica variaveis no .env e retorna dict com status."""
     _load_env_file()
+    # Obrigatorias. O developer token saiu da lista em 09/09/2026 (aposentado pelo Google) e o
+    # LOGIN_CUSTOMER_ID so e necessario pra quem consulta contas atraves de um MCC.
     keys = [
-        "GOOGLE_ADS_DEVELOPER_TOKEN",
         "GOOGLE_ADS_CLIENT_ID",
         "GOOGLE_ADS_CLIENT_SECRET",
         "GOOGLE_ADS_REFRESH_TOKEN",
+    ]
+    opcionais = [
         "GOOGLE_ADS_LOGIN_CUSTOMER_ID",
+        "GOOGLE_ADS_DEVELOPER_TOKEN",
     ]
     status = {}
     for key in keys:
@@ -75,6 +79,11 @@ def check_env():
         icon = "OK" if present else "FALTA"
         display = mask_token(val) if present and "TOKEN" in key else ("OK" if present else "")
         print(f"  {icon}: {key} {display}")
+    for key in opcionais:
+        val = os.environ.get(key)
+        present = bool(val and val.strip())
+        display = mask_token(val) if present and "TOKEN" in key else ("OK" if present else "nao usado")
+        print(f"  opcional: {key} {display}")
     return status
 
 
@@ -86,7 +95,7 @@ def cmd_check():
     print("=== .env ===")
     if not os.path.isfile(ENV_PATH):
         print(f"  FALTA: Arquivo .env nao encontrado em {ENV_PATH}")
-        print(f"  Crie o arquivo com o template do SKILL.md")
+        print("  Copie o modelo: cp .claude/skills/google-ads/.env.example .claude/skills/google-ads/.env")
         return
     status = check_env()
     print()
@@ -102,6 +111,10 @@ def cmd_check():
             print(f"PROXIMO PASSO: Preencher no .env: {', '.join(missing)}")
     else:
         print("TUDO OK! Rode 'python3 setup.py test' pra confirmar a conexao.")
+        print()
+        print("Se o teste falhar com CLOUD_PROJECT_NOT_APPROVED_FOR_PRODUCTION, o projeto do")
+        print("Google Cloud ainda esta em Test. Peca o nivel Explorer em:")
+        print("  https://console.cloud.google.com/google/ads-apis/overview")
 
 
 # ---------------------------------------------------------------------------
@@ -324,14 +337,14 @@ def cmd_full():
 
     if not os.path.isfile(ENV_PATH):
         print(f"\nERRO: .env nao encontrado em {ENV_PATH}")
-        print("Crie o arquivo com o template do SKILL.md antes de continuar.")
+        print("Copie o modelo: cp .claude/skills/google-ads/.env.example .claude/skills/google-ads/.env")
         sys.exit(1)
 
     status = check_env()
     print()
 
     # Checa pre-requisitos do OAuth
-    for key in ["GOOGLE_ADS_DEVELOPER_TOKEN", "GOOGLE_ADS_CLIENT_ID", "GOOGLE_ADS_CLIENT_SECRET"]:
+    for key in ["GOOGLE_ADS_CLIENT_ID", "GOOGLE_ADS_CLIENT_SECRET"]:
         if not status.get(key):
             print(f"ERRO: {key} precisa estar preenchido antes de gerar o refresh token.")
             sys.exit(1)

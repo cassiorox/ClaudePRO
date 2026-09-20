@@ -7,6 +7,29 @@ description: Gerencia campanhas Meta Ads (Facebook/Instagram) via SDK oficial. L
 
 Skill completa para gestao de Meta Ads via SDK oficial (`facebook-business`). Substitui o MCP fb-ads-mcp-server com mais poder: duplicacao de campanhas/ads, swap de url_tags, e acesso total a API.
 
+## Antes do setup: conector oficial x skill
+
+Se o usuario so quer **ler** dados (perguntar quanto gastou, quais campanhas estao ativas, comparar
+periodos), existe um caminho sem setup nenhum: o **conector oficial da Meta dentro do Claude**. Conecta
+pela tela de conectores, faz login com a conta do Facebook e pronto. Sem criar app, sem gerar token, sem
+`.env`.
+
+Esta skill continua sendo o caminho quando o usuario precisa de:
+
+- **Escrita em escala**: criar campanha, conjunto, criativo, subir imagem e video, duplicar, trocar
+  `url_tags` em lote
+- **Fluxo repetivel**: os padroes da pasta `references/` e do `aprendizados.md`
+- **Controle total**: qualquer campo da API, inclusive os que o conector nao expoe
+
+Quando o usuario pedir setup, vale dizer isso em uma linha antes de comecar: "se for so pra consultar, da
+pra usar o conector oficial e pular tudo isso. Pra criar e editar, o setup vale a pena." Depois seguir.
+
+**Curiosidade util pra quem vem do Google Ads:** la nao existe conector de um clique, e o motivo e
+estrutural. A Google Ads API autoriza o **projeto do Google Cloud** que gerou as credenciais, nao a pessoa
+que faz login, entao cada um precisa do proprio projeto aprovado. A Meta autoriza o app mais o usuario, e
+por isso a Meta consegue manter um conector pronto. Explicacao completa na secao 13 de
+`.claude/skills/google-ads/references/mcp-server.md`.
+
 ## Setup (primeira vez)
 
 Quando o usuario pedir para configurar, rodar setup, ou for a primeira vez usando a skill, o Claude deve guiar o setup interativo.
@@ -24,7 +47,8 @@ cria ele ja com o template preenchivel. Basta preencher e rodar de novo.
 
 ### 2. Conferir o .env
 
-O arquivo fica em `.claude/skills/meta-ads/.env` e tem este formato:
+O arquivo fica em `.claude/skills/meta-ads/.env`. Se o `setup.py` nao criar, da pra copiar do modelo
+que ja vem na pasta (`cp .env.example .env`). O formato e este:
 
 ```
 # Meta Ads ClaudePRO — Configuracao

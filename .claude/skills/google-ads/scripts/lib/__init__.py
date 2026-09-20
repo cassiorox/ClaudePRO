@@ -100,10 +100,12 @@ def init_client():
     refresh_token = os.environ.get("GOOGLE_ADS_REFRESH_TOKEN")
     login_customer_id = os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID")
 
-    if dev_token and client_id and client_secret and refresh_token:
+    # O developer token deixou de ser obrigatorio: o Google aposentou os tokens em 09/09/2026 e o nivel
+    # de acesso passou a ser do projeto Cloud que gerou as credenciais OAuth. A lib google-ads aceita
+    # chamada sem ele a partir da 32.0.0. Se o token estiver no .env ainda e enviado (aceito e ignorado).
+    if client_id and client_secret and refresh_token:
         # Build from env vars
         config = {
-            "developer_token": dev_token,
             "client_id": client_id,
             "client_secret": client_secret,
             "refresh_token": refresh_token,
@@ -111,10 +113,13 @@ def init_client():
         }
         if login_customer_id:
             config["login_customer_id"] = login_customer_id.replace("-", "")
+        if dev_token:
+            config["developer_token"] = dev_token
 
         _client = GoogleAdsClient.load_from_dict(config)
         source = env_file or "env vars"
-        print(f"Client inicializado via {source} (token: {mask_token(dev_token)})", file=sys.stderr)
+        token_info = f" (token: {mask_token(dev_token)})" if dev_token else " (sem developer token)"
+        print(f"Client inicializado via {source}{token_info}", file=sys.stderr)
         return _client
 
     # Fallback: google-ads.yaml
@@ -126,11 +131,14 @@ def init_client():
 
     print("ERRO: Credenciais Google Ads nao encontradas.", file=sys.stderr)
     print("  Crie o arquivo .claude/skills/google-ads/.env com:", file=sys.stderr)
-    print('  GOOGLE_ADS_DEVELOPER_TOKEN="seu-token"', file=sys.stderr)
     print('  GOOGLE_ADS_CLIENT_ID="seu-client-id"', file=sys.stderr)
     print('  GOOGLE_ADS_CLIENT_SECRET="seu-secret"', file=sys.stderr)
     print('  GOOGLE_ADS_REFRESH_TOKEN="seu-refresh-token"', file=sys.stderr)
-    print('  GOOGLE_ADS_LOGIN_CUSTOMER_ID="1234567890"', file=sys.stderr)
+    print('  GOOGLE_ADS_LOGIN_CUSTOMER_ID="1234567890"  # so se usar MCC', file=sys.stderr)
+    print("", file=sys.stderr)
+    print("  GOOGLE_ADS_DEVELOPER_TOKEN deixou de ser obrigatorio em 09/09/2026.", file=sys.stderr)
+    print("  O nivel de acesso agora e do projeto Cloud:", file=sys.stderr)
+    print("  https://console.cloud.google.com/google/ads-apis/overview", file=sys.stderr)
     print("", file=sys.stderr)
     print("  Ou crie um google-ads.yaml na mesma pasta.", file=sys.stderr)
     print("  Ou rode: /google-ads setup", file=sys.stderr)

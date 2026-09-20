@@ -5,8 +5,11 @@ Skill de execucao para Google Ads no ecossistema ClaudePRO. Usa o SDK oficial `g
 ## Instalacao
 
 ```bash
-pip3 install google-ads google-auth-oauthlib protobuf
+pip3 install "google-ads>=32.0.0" google-auth-oauthlib protobuf
 ```
+
+A versao minima importa: ate a 31.4.0 a lib recusava rodar sem developer token, que o Google
+aposentou em 09/09/2026.
 
 ## Configuracao
 
@@ -18,7 +21,8 @@ cd .claude/skills/google-ads/scripts
 # Verifica o que falta
 python3 setup.py check
 
-# Preencha CLIENT_ID, CLIENT_SECRET e DEVELOPER_TOKEN no .env
+# Copie o modelo e preencha CLIENT_ID e CLIENT_SECRET no .env
+#   cp ../.env.example ../.env
 # Depois gere o refresh token automaticamente:
 python3 setup.py oauth
 
@@ -33,17 +37,20 @@ Documentacao oficial Google Ads API: https://developers.google.com/google-ads/ap
 
 ### Opcao 2: Manual
 
-Crie o arquivo `.claude/skills/google-ads/.env` com:
+Copie `.env.example` para `.env` na pasta da skill e preencha:
 
 ```
-GOOGLE_ADS_DEVELOPER_TOKEN="seu-developer-token"
 GOOGLE_ADS_CLIENT_ID="seu-client-id.apps.googleusercontent.com"
 GOOGLE_ADS_CLIENT_SECRET="seu-client-secret"
-GOOGLE_ADS_REFRESH_TOKEN="seu-refresh-token"
-GOOGLE_ADS_LOGIN_CUSTOMER_ID="1234567890"
+GOOGLE_ADS_REFRESH_TOKEN="gerado pelo setup.py oauth"
+GOOGLE_ADS_LOGIN_CUSTOMER_ID="1234567890"   # so se usar MCC, sem hifens
 ```
 
 Ou use o formato padrao `google-ads.yaml` na mesma pasta.
+
+**Nao existe mais developer token.** O Google aposentou em 09/09/2026. O nivel de acesso agora
+pertence ao projeto do Google Cloud que gerou essas credenciais OAuth, e ele precisa estar em
+**Explorer** ou acima. O passo a passo completo, com as pegadinhas, esta no `SKILL.md`.
 
 ## Scripts
 
@@ -86,8 +93,10 @@ google-ads/
 ├── README.md             # Esta documentacao
 ├── contas.yaml           # Cadastro de contas/clientes
 ├── .gitignore
+├── .env.example          # Modelo de credenciais (copie pra .env e preencha)
 ├── references/
-│   └── api-reference.md  # Referencia de GAQL queries uteis
+│   ├── api-reference.md  # Referencia de GAQL queries uteis
+│   └── mcp-server.md     # Playbook do servidor MCP oficial do Google Ads
 └── scripts/
     ├── lib/
     │   └── __init__.py     # Auth, .env loader, helpers
