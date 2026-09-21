@@ -11,3 +11,6 @@ dist/
 build/
 .idea/
 .vscode/
+
+# Atalho por maquina pra .claude/skills (ver AGENTS.md)
+.agents/skills

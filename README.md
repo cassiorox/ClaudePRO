@@ -51,6 +51,10 @@ O Claude vai te fazer algumas perguntas e configurar o sistema pro seu negócio.
 - `/google-ads` — gerencia campanhas Google Ads via SDK oficial
 - `/proposta-comercial` — cria propostas comerciais em PDF com a identidade visual da sua marca
 
+**Instruções do workspace:**
+- `AGENTS.md` — o arquivo real de instruções, lido por Claude Code, Codex, Cursor, Gemini CLI e outros agentes. É aqui que entra toda regra nova
+- `CLAUDE.md` — só um ponteiro (`@AGENTS.md`) mais o que for exclusivo do Claude Code. Não escreva instrução nova aqui
+
 **Materiais de apoio:**
 - `.claude/skills/google-ads/references/mcp-server.md` — playbook do servidor MCP oficial do Google Ads (leitura direta da conta dentro do Claude), incluindo por que no Meta o conector é de um clique e no Google não
 

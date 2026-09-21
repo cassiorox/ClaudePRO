@@ -52,8 +52,8 @@ Se o remote ja apontar pra outro lugar (ou nao existir), nao fazer nada e nao co
 Aceitar variacoes ("sou solo", "trabalho sozinho", "tenho time") e mapear para `agencia` ou `eugencia`.
 
 **Apos a resposta**, ler o template correspondente como referencia interna (sem mostrar pro usuario):
-- `agencia` → `templates/perfis/claude-md-agencia.md`
-- `eugencia` → `templates/perfis/claude-md-eugencia.md`
+- `agencia` → `templates/perfis/agents-md-agencia.md`
+- `eugencia` → `templates/perfis/agents-md-eugencia.md`
 
 ### Pergunta 2: Nome
 
@@ -230,6 +230,7 @@ Depois de salvar, mostrar:
 
 ## Regras importantes
 
+0. **Instrucao nova vai no `AGENTS.md`, nunca no `CLAUDE.md`.** O `AGENTS.md` e o arquivo real do workspace, lido por Claude Code, Codex e outros agentes. O `CLAUDE.md` e so um ponteiro (`@AGENTS.md`). Vale pra este setup e pra qualquer regra que o usuario pedir pra salvar depois.
 1. **Uma pergunta por vez.** Nunca enviar lista de 12 perguntas de uma so vez.
 2. **Nao inventar respostas.** Se o usuario nao responder algo, deixar o campo vazio ou colocar `[a definir]`.
 3. **Sem emojis** nas perguntas, a menos que o usuario sinalize estilo descontraido na pergunta 9.
