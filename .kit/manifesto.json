@@ -1,5 +1,5 @@
 {
- "versao": "2026-10-09 16:34 UTC",
+ "versao": "2026-10-13 01:16 UTC",
  "atual": [
   ".claude/skills/atualizar-kit/SKILL.md",
   ".claude/skills/auditoria-conta-google-ads/SKILL.md",
@@ -538,19 +538,23 @@
    "a56074fec5fab292a55ed646cd77504beac311b4"
   ],
   ".claude/skills/meta-vv-publicos/FONTE.md": [
+   "75370e33ab8303fc2e438dbaf0e0e25af94aba08",
    "7ad03e6d52ef81456f1045aac2b4c857c58e20ef"
   ],
   ".claude/skills/meta-vv-publicos/LICENSE": [
    "15bbeaa132434d77f4543f4e97fb1187aa6f0100"
   ],
   ".claude/skills/meta-vv-publicos/README.md": [
+   "1968a4f950fc4631427d1348041c8329f83e256d",
    "bfd2ba96ad42142a860ec3dd0dd63a1442e30671"
   ],
   ".claude/skills/meta-vv-publicos/SKILL.md": [
+   "955a13292450d72b7eaecadfd6a09b81493e6cba",
    "961553fea4e6e05fc01ded5d014e1b200411272d"
   ],
   ".claude/skills/meta-vv-publicos/setup.py": [
-   "8daeb6c3dd4a0980511560990d372cea5fd73070"
+   "8daeb6c3dd4a0980511560990d372cea5fd73070",
+   "f51a6fb7075bc95cc2bf4da50f91f61c85f65103"
   ],
   ".claude/skills/meta-vv-publicos/vv_campanha.py": [
    "cfc3685db1718b75d2c5a8dbf04756da691ba402"
@@ -622,6 +626,7 @@
   ],
   "AGENTS.md": [
    "3ad452eea90994312db272ef1f010201fbd2ff6b",
+   "735e9eb7ef7a7012d9fe53e5ca1fadcef6b262f8",
    "9474128e5d8bde5ef5be8da3e6f656bcb1eebe1e",
    "a230b268042800247f8a12e567172a5374ac8860"
   ],
@@ -636,7 +641,8 @@
    "e5253938825655137ad9af02bc1dfbace8e71efe"
   ],
   "NOVIDADES.md": [
-   "b5eb64f187bfed5206cdacf2f9bde0e5127c754a"
+   "b5eb64f187bfed5206cdacf2f9bde0e5127c754a",
+   "e6f756973cb656035a2da21b21530961ef8ddb28"
   ],
   "README.md": [
    "01ee026234f127dd4515c09a85f64b59a3bfcce7",

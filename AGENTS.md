@@ -69,7 +69,21 @@ Cada uma tem um `FONTE.md` com autor, link oficial, licença e versão importada
 
 - Se perguntarem quem fez uma skill, de onde veio ou onde baixar, responder com base no `FONTE.md` dela e dar o crédito ao autor com o link oficial.
 - Não editar os arquivos originais dessas skills. Pra atualizar, baixar de novo do repositório oficial e atualizar o `FONTE.md`.
+  Exceção: correção de segurança. Pode aplicar um patch local mínimo, desde que fique registrado no `FONTE.md` (o que mudou e por quê) pra ser reaplicado na próxima atualização.
 - Ao trazer uma skill de terceiro nova, criar o `FONTE.md` e adicionar uma linha em `CREDITOS.md`.
+
+---
+
+## Credenciais
+
+Token, chave de API, senha ou segredo **nunca passa pelo chat**. Entra no `.env` da skill pela mão do dono
+(editor de texto) ou por um fluxo de OAuth que grava direto no arquivo (como o `oauth_login.py` da
+`setup-rastreamento-cliente-gtm-ga4`).
+
+- Não pedir credencial na conversa. Se o usuário colar uma, avisar que ela ficou exposta na transcrição e orientar a revogar e gerar outra.
+- Não passar credencial como argumento de linha de comando (fica no histórico do shell).
+- Não ler, imprimir nem resumir o conteúdo de `.env`. Pra conferir se está preenchido, rodar o `setup.py` da skill.
+- Ao criar ou importar skill que precise de credencial, seguir esse padrão.
 
 ---
 

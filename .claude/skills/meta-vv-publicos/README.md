@@ -49,10 +49,15 @@ cd meta-vv-publicos
 python setup.py
 ```
 
-O `setup.py` é a instalação guiada: valida seu token na API, **lista suas contas
-de anúncio e páginas com Instagram** (pra você só copiar os `act_...`), avisa se
-falta permissão e cria o `.env`. Sem ele, dá pra fazer na mão: copie
-`.env.example` para `.env` e preencha o `META_TOKEN`.
+O `setup.py` é a instalação guiada: cria o `.env` (a partir do `.env.example`),
+valida o token na API, **lista suas contas de anúncio e páginas com Instagram**
+(pra você só copiar os `act_...`) e avisa se falta permissão.
+
+O token entra **só no `.env`, preenchido por você** num editor. Ele nunca vai por
+argumento de linha de comando nem pelo chat do Claude, porque ali fica gravado na
+transcrição e no histórico do shell. Rodando `python setup.py` no seu próprio
+terminal com o `.env` vazio, ele pede o token com entrada oculta e grava direto no
+arquivo.
 
 ### Como skill do Claude Code
 

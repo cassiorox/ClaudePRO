@@ -4,6 +4,14 @@ Para trazer as novidades pro teu kit sem perder nada, rode `/atualizar-kit`.
 
 ---
 
+## 2026-10-12
+
+- **Correção de segurança no `/meta-vv-publicos`**: o setup pedia o token da Meta no chat e recebia por argumento (`--token`), o que deixava o token exposto na transcrição da conversa e no histórico do terminal. Agora o token entra só no `.env` da skill, preenchido por você num editor, e o arquivo fica protegido (permissão 600). Se você já colou o token no chat alguma vez, revogue e gere outro.
+- Nova regra no `AGENTS.md`: token, chave ou senha nunca passa pelo chat.
+- Obrigado ao **Carlos Sarmento** por ter avisado do problema.
+
+---
+
 ## 2026-10-09
 
 - **`/onboarding`**: onboarding completo de cliente novo. Puxa site, Instagram e Google Meu Negócio, cria a pasta do cliente, o `contexto.md` e gera os estudos de persona e de mercado.

@@ -1,16 +1,23 @@
 """Setup guiado do meta-vv-publicos: valida o token na API, mostra suas contas
-de anuncio e paginas (pra voce copiar os act_...) e cria o .env.
+de anuncio e paginas (pra voce copiar os act_...).
 
-Uso:
-  python setup.py                        interativo (cola o token quando pedir)
-  python setup.py --token SEU_TOKEN      direto (ex.: quando o Claude Code roda por voce)
-  python setup.py --insights-token OUTRO opcional: token separado so pros insights do IG
+O token NUNCA entra por argumento de linha de comando nem pelo chat do Claude
+(ficaria gravado na transcricao e no historico do shell). Ele entra no .env pela
+mao do dono:
+
+  1. cp .env.example .env   (o proprio setup cria, se nao existir)
+  2. abra o .env num editor e preencha META_TOKEN (e, opcional, META_INSIGHTS_TOKEN)
+  3. python setup.py        valida o token do .env e lista contas e paginas
+
+Rodando num terminal seu (fora do Claude), se o .env estiver vazio o setup pede o
+token com entrada oculta e grava direto no .env.
 """
-import argparse, json, os, sys, urllib.error, urllib.parse, urllib.request
+import getpass, json, os, shutil, stat, sys, urllib.error, urllib.parse, urllib.request
 
 G = "https://graph.facebook.com/v21.0"
 HERE = os.path.dirname(os.path.abspath(__file__))
 ENV_PATH = os.path.join(HERE, ".env")
+EXAMPLE_PATH = os.path.join(HERE, ".env.example")
 
 PERMS_ADS = {"ads_management"}
 PERMS_ORGANICO = {"pages_show_list", "pages_read_engagement", "instagram_basic", "instagram_manage_insights"}
@@ -35,11 +42,55 @@ def fail(msg):
     sys.exit(1)
 
 
+def read_env():
+    env = {}
+    if os.path.exists(ENV_PATH):
+        for line in open(ENV_PATH, encoding="utf-8"):
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                env[k.strip()] = v.strip().strip('"')
+    return env
+
+
+def protect(path):
+    try:
+        os.chmod(path, stat.S_IRUSR | stat.S_IWUSR)  # 600: so o dono le
+    except OSError:
+        pass
+
+
+def write_token(tok):
+    """Grava META_TOKEN no .env preservando o resto do arquivo."""
+    lines, done = [], False
+    if os.path.exists(ENV_PATH):
+        for line in open(ENV_PATH, encoding="utf-8").read().splitlines():
+            if line.strip().startswith("META_TOKEN="):
+                line, done = "META_TOKEN=%s" % tok, True
+            lines.append(line)
+    if not done:
+        lines.append("META_TOKEN=%s" % tok)
+    with open(ENV_PATH, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    protect(ENV_PATH)
+
+
+def pedir_preenchimento():
+    if not os.path.exists(ENV_PATH) and os.path.exists(EXAMPLE_PATH):
+        shutil.copyfile(EXAMPLE_PATH, ENV_PATH)
+        protect(ENV_PATH)
+        print("\nok .env criado a partir do .env.example em %s" % ENV_PATH)
+    print("\n>> Abra o arquivo abaixo num editor, preencha META_TOKEN e salve:")
+    print("   %s" % ENV_PATH)
+    print("   Depois rode de novo: python setup.py")
+    print("   (nao cole o token no chat nem passe por argumento)")
+    sys.exit(2)
+
+
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--token", help="token da Meta (senao, pede interativo)")
-    ap.add_argument("--insights-token", help="opcional: token separado com as permissoes de IG")
-    a = ap.parse_args()
+    if len(sys.argv) > 1:
+        fail("o setup nao aceita argumentos. O token vai no .env, preenchido por voce "
+             "(veja o topo deste arquivo). Nunca passe o token na linha de comando.")
 
     print("")
     print("=== meta-vv-publicos: setup ===")
@@ -47,11 +98,20 @@ def main():
         fail("Python 3.9+ necessario (voce tem %d.%d)." % sys.version_info[:2])
     print("ok Python %d.%d" % sys.version_info[:2])
 
-    tok = (a.token or "").strip()
+    env = read_env()
+    tok = (os.environ.get("META_TOKEN") or env.get("META_TOKEN") or "").strip()
+    gravar = False
     if not tok:
-        tok = input("\nCole seu token da Meta e aperte Enter: ").strip()
-    if not tok:
-        fail("nenhum token informado.")
+        if sys.stdin.isatty():
+            # terminal do proprio usuario: entrada oculta, vai direto pro .env
+            tok = getpass.getpass("\nCole seu token da Meta (nao aparece na tela) e aperte Enter: ").strip()
+            gravar = bool(tok)
+        if not tok:
+            pedir_preenchimento()
+    else:
+        if os.path.exists(ENV_PATH):
+            protect(ENV_PATH)
+        print("ok META_TOKEN lido do .env")
 
     # 1. token valido?
     me = get("me", {"fields": "id,name"}, tok)
@@ -100,13 +160,12 @@ def main():
     else:
         print("\n!! nenhuma pagina visivel pro token (modo por campanha funciona mesmo assim)")
 
-    # 5. escreve o .env
-    lines = ["META_TOKEN=%s" % tok]
-    if a.insights_token:
-        lines.append("META_INSIGHTS_TOKEN=%s" % a.insights_token.strip())
-    with open(ENV_PATH, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines) + "\n")
-    print("\nok .env criado em %s" % ENV_PATH)
+    # 5. grava o token no .env (so quando veio da entrada oculta)
+    if gravar:
+        if os.path.exists(EXAMPLE_PATH) and not os.path.exists(ENV_PATH):
+            shutil.copyfile(EXAMPLE_PATH, ENV_PATH)
+        write_token(tok)
+        print("\nok token gravado em %s" % ENV_PATH)
 
     print("\nProximo passo (sempre com --dry-run primeiro):")
     print("  python vv_publicos.py --contas %s --retencoes 75,95 --min-views 100000 --dry-run" % primeira)

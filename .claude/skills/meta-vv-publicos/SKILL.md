@@ -12,11 +12,16 @@ dos anúncios de uma campanha específica).
 
 ## Fluxo obrigatório (wizard conversacional)
 
-1. **Setup, se necessário**: se não existir `.env` nesta pasta, pedir ao usuário o
-   token da Meta (ver permissões no README) e rodar
-   `python setup.py --token <TOKEN>`. Mostrar ao usuário o resumo que o setup
-   imprime (contas de anúncio e páginas encontradas) — os `act_...` listados são
-   os candidatos pro passo 3.
+1. **Setup, se necessário**: se não existir `.env` nesta pasta ou o `META_TOKEN`
+   estiver vazio, rodar `python setup.py` (sem argumentos). Ele cria o `.env` a
+   partir do `.env.example` e para. Mostrar ao usuário o caminho do `.env` e pedir
+   que **ele mesmo** abra o arquivo num editor, cole o token em `META_TOKEN` e
+   salve (permissões no README). Esperar o "pronto" e rodar `python setup.py` de
+   novo. Mostrar o resumo que o setup imprime (contas de anúncio e páginas
+   encontradas): os `act_...` listados são os candidatos pro passo 3.
+   **Token nunca passa pelo chat:** não pedir o token na conversa, não aceitar
+   se o usuário colar (orientar a revogar e gerar outro), não passar por
+   argumento, não ler nem imprimir o conteúdo do `.env`.
 2. **Perguntar a fonte** (se o pedido não deixar claro): vídeos orgânicos do
    Instagram (`vv_publicos.py`) ou vídeos dos anúncios de uma campanha
    (`vv_campanha.py`).
